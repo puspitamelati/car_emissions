@@ -44,8 +44,11 @@ cylind_emis = alt.Chart(df).mark_line(color='black', interpolate='monotone').enc
     tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
+point_1 = cylind_emis.mark_circle(color='black').encode(
+    opacity = alt.value(1))
+
 #Gabungkan cylind_cons dan cylin_emis 
-cylind = alt.layer(cylind_cons, cylind_emis).resolve_scale(
+cylind = alt.layer(cylind_cons, cylind_emis+point_1).resolve_scale(
     y = 'independent' 
 ).properties(
     title = "Rata-rata Konsumsi Bahan Bakar dan Rata-rata Emisi CO2 tiap Silinder"
@@ -67,8 +70,11 @@ transmission_emis= alt.Chart(df).mark_line(color = 'black', interpolate='monoton
     tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
+point_2 = transmission_emis.mark_circle(color='black').encode(
+    opacity = alt.value(1))
+
 #gabungkan transmission_cons dan transmission_emis 
-transmission = alt.layer(transmission_cons, transmission_emis).resolve_scale(
+transmission = alt.layer(transmission_cons, transmission_emis+point_2).resolve_scale(
     y = 'independent' 
 ).properties(
     title = "Rata-rata Konsumsi Bahan Bakar dan Rata-rata Emisi CO2 tiap Jenis Transmisi"
@@ -90,7 +96,10 @@ fuel_emis = alt.Chart(df).mark_line(color = 'black', interpolate = 'monotone').e
     tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
-fuel = alt.layer(fuel_cons, fuel_emis).resolve_scale(
+point_3 = fuel_emis.mark_circle(color='black').encode(
+    opacity = alt.value(1))
+
+fuel = alt.layer(fuel_cons, fuel_emis+point_3).resolve_scale(
     y = 'independent' 
 ).properties(
     title = "Rata-rata Konsumsi Bahan Bakar dan Rata-rata Emisi CO2 tiap Jenis Bahan Bakar"
