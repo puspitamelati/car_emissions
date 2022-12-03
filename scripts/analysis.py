@@ -25,7 +25,8 @@ v_class = alt.Chart(df, title = 'Rata-rata Emisi CO2 tiap Kelas Kendaraan').mark
     alt.Y('Vehicle Class'),
     alt.X('average(CO2_Emissions):Q',
           axis=alt.Axis(title='Rata-rata Emis CO2')),
-    color = alt.condition(selec, alt.value("#2F4F4F"), alt.value("grey"))
+    color = alt.condition(selec, alt.value("#2F4F4F"), alt.value("grey")),
+    tooltip = ['Vehicle Class','average(CO2_Emissions):Q']
 ).properties(width = 400
 ).add_selection(selec)
 
@@ -38,8 +39,9 @@ cylind_cons = alt.Chart(df).mark_bar(color = '#2F4F4F').encode(
 
 cylind_emis = alt.Chart(df).mark_line(color='black', interpolate='monotone').encode(
     alt.X('Cylinders:O'),
-    alt.Y('average(CO2_Emissions)', 
-          axis=alt.Axis(labelColor='black', titleColor='black'))  
+    alt.Y('average(CO2_Emissions)','average(Fuel_Consumption):Q'], 
+          axis=alt.Axis(labelColor='black', titleColor='black')),
+    tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
 #Gabungkan cylind_cons dan cylin_emis 
@@ -61,7 +63,8 @@ transmission_cons= alt.Chart(df).mark_bar(color = '#2F4F4F').encode(
 transmission_emis= alt.Chart(df).mark_line(color = 'black', interpolate='monotone').encode(
     alt.X('Transmission'),
     alt.Y('average(CO2_Emissions):Q',
-          axis=alt.Axis(labelColor='black', titleColor='black')) 
+          axis=alt.Axis(labelColor='black', titleColor='black')),
+    tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
 #gabungkan transmission_cons dan transmission_emis 
@@ -83,7 +86,8 @@ fuel_cons = alt.Chart(df).mark_bar(color = '#2F4F4F').encode(
 fuel_emis = alt.Chart(df).mark_line(color = 'black', interpolate = 'monotone').encode(
     alt.X('Fuel'),
     alt.Y('average(CO2_Emissions)',
-          axis=alt.Axis(labelColor='black', titleColor='black')) 
+          axis=alt.Axis(labelColor='black', titleColor='black')),
+    tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
 fuel = alt.layer(fuel_cons, fuel_emis).resolve_scale(
@@ -97,13 +101,15 @@ fuel = alt.layer(fuel_cons, fuel_emis).resolve_scale(
 #pengaruh ukuran mesin terhadap konsumsi energi
 engine = alt.Chart(df, title='Pengaruh Ukuran Mesin terhadap Konsumsi Energi').mark_line(color = '#2F4F4F').encode(
     alt.X('Engine_Size'),
-    alt.Y('average(Fuel_Consumption):Q')  
+    alt.Y('average(Fuel_Consumption):Q'),
+    tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
 
 #pengaruh konsumsi energi terhadap emisi CO2
 fuel_emission = alt.Chart(df, title ='Pengaruh Konsumsi Energi terhadap Emisi CO2 ').mark_line(color='#2F4F4F').encode(
     alt.X('Fuel_Consumption:Q'),
     alt.Y('average(CO2_Emissions):Q'),
+    tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400
 ).add_selection(selec
 ).transform_filter(
