@@ -22,7 +22,7 @@ selec = alt.selection_multi(encodings=['y'])
 
 #grafik Rata-rata Emisi CO2 tiap Kelas Kendaraan
 v_class = alt.Chart(df, title = 'Rata-rata Emisi CO2 tiap Kelas Kendaraan').mark_bar().encode(
-    alt.Y('Vehicle Class'),
+    alt.Y('Vehicle Class', sort='-x'),
     alt.X('average(CO2_Emissions):Q',
           axis=alt.Axis(title='Rata-rata Emis CO2')),
     color = alt.condition(selec, alt.value("#2F4F4F"), alt.value("grey")),
