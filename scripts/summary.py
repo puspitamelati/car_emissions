@@ -22,7 +22,7 @@ selec = alt.selection_multi(encodings=['y'])
 #top 10 produsen and vehicle class with low carbon emissions
 
 prod = alt.Chart(df, title='Rata-rata Emisi CO2 tiap Produsen Kendaraan').mark_bar(color = '#2F4F4F').encode(
-    alt.Y('Produsen'),
+    alt.Y('Produsen', sort='-x'),
     alt.X('average(CO2_Emissions)'),
     color = alt.condition(selec, alt.value("#2F4F4F"), alt.value("grey"))
 ).transform_filter(alt.FieldRangePredicate(field='Rank', range=[1, 15])
@@ -31,7 +31,7 @@ prod = alt.Chart(df, title='Rata-rata Emisi CO2 tiap Produsen Kendaraan').mark_b
 top = alt.Chart(df, title='Rata-rata Emisi CO2 tiap Kelas Kendaraan ').mark_bar(color='#2F4F4F').encode(
     alt.X('average(CO2_Emissions)',
          axis= alt.Axis(title='Rata-rata Emisi Karbon Dioksida')),
-    alt.Y('Vehicle Class',
+    alt.Y('Vehicle Class', sort='-x
          axis = alt.Axis(title='Produsen'))
 ).transform_filter(alt.FieldRangePredicate(field='Rank_Produsen', range=[1, 15])
 ).add_selection(selec
