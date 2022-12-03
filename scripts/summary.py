@@ -31,7 +31,7 @@ prod = alt.Chart(df, title='Rata-rata Emisi CO2 tiap Produsen Kendaraan').mark_b
 top = alt.Chart(df, title='Rata-rata Emisi CO2 tiap Kelas Kendaraan ').mark_bar(color='#2F4F4F').encode(
     alt.X('average(CO2_Emissions)',
          axis= alt.Axis(title='Rata-rata Emisi Karbon Dioksida')),
-    alt.Y('Vehicle Class', sort='-x
+    alt.Y('Vehicle Class', sort='-x',
          axis = alt.Axis(title='Produsen'))
 ).transform_filter(alt.FieldRangePredicate(field='Rank_Produsen', range=[1, 15])
 ).add_selection(selec
