@@ -39,7 +39,7 @@ cylind_cons = alt.Chart(df).mark_bar(color = '#2F4F4F').encode(
 
 cylind_emis = alt.Chart(df).mark_line(color='black', interpolate='monotone').encode(
     alt.X('Cylinders:O'),
-    alt.Y('average(CO2_Emissions)','average(Fuel_Consumption):Q'], 
+    alt.Y('average(CO2_Emissions)', 
           axis=alt.Axis(labelColor='black', titleColor='black')),
     tooltip=['average(CO2_Emissions)','average(Fuel_Consumption):Q']
 ).properties(width = 400)
